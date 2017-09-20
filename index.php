@@ -57,7 +57,7 @@
 			</form>
 
 				<?php if ($_GET) : ?>
-            <div class="alert <?=$alertType?>" role="alert">
+            <div class="alert <?=$alertType?> text-center" role="alert">
                 <?=$results?>
             </div>
         <?php endif; ?>
