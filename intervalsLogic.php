@@ -10,7 +10,7 @@
 	the interval is comprised of. Because arrays start at 0 by default, and the Unison interval starts at 0, we do not need to implement our own keys. */
 	$intervalNames = ['Unison', 'Minor 2nd', 'Major 2nd', 'Minor 3rd', 'Major 3rd', 'Perfect 4th', 'Tri-Tone (Also called Augmented 4th or Diminished 5th)', 'Perfect 5th', 'Minor 6th', 'Major 6th', 'Minor 7th', 'Major 7th', 'Octave', 'Minor 9th', 'Major 9th', 'Minor 10th', 'Major 10th', 'Perfect 11th', 'Augmented 11th or Dimished 12th', 'Perfect 12th', 'Minor 13th', 'Major 13th', 'Minor 14th', 'Major 14th'];
 
-	/*Series of if states that check for user inputs. This prevents errors from showing up when the page is first loaded and there are no inputs. */ 
+	/*Series of if states that check for user inputs. This prevents errors from showing up when the page is first loaded and there are no inputs and saves the users choices when the page reloads. */ 
 	if (isset($_GET['note'])) {
 	    $note = $_GET['note'];
 	} else {
@@ -37,8 +37,10 @@
 
 	if (isset($_GET['octave'])) {
 	    $octave = true;
+	    $octaveChecked = "Checked";
 	} else {
 	    $octave = false;
+	    $octaveChecked = '';
 	}
 
 

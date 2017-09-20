@@ -20,7 +20,7 @@
 				<div class="form-group">
 					<div class="lineOne">
 						<label for="note">Enter your first note:</label>
-						<input type="text" class="form-control" name='note' id='note' placeholder="C, F, G, Etc">
+						<input type="text" class="form-control" name='note' id='note' placeholder="C, F, G, Etc" value='<?=sanitize($note)?>'>
 
 						<select name='accidental' id='accidental' class="form-control">
 							<option value='natural' >Natural</option>
@@ -31,8 +31,8 @@
 					</div>
 					
 					<div class="lineTwo">
-						<label for='note'>Enter your second note:</label>
-						<input type='text' class="form-control" name='noteTwo' id='noteTwo' placeholder="C, F, G, Etc">
+						<label for='noteTwo'>Enter your second note:</label>
+						<input type='text' class="form-control" name='noteTwo' id='noteTwo' placeholder="C, F, G, Etc" value='<?=sanitize($noteTwo)?>'>
 
 						<select name='accidentalTwo' id='accidentalTwo' class="form-control">
 							<option value='natural' >Natural</option>
@@ -43,7 +43,7 @@
 					</div>
 
 					<div class="lineThree">
-						<input type='checkbox' name='octave' id='octave'>
+						<input type='checkbox' name='octave' id='octave' <?=$octaveChecked?>>
 						<label for='octave'>Add an Octave</label>
 						<br>
 					</div>
