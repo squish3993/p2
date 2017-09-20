@@ -15,7 +15,9 @@
 	<body>
 		<div class="jumbotron container">
 			<h1 class="display-3 text-center">Intervals</h1>
-
+			<p class='message text-center'> 
+				A simple app for figuring out the musical interval between two notes
+			</p>
 			<form method='Get' class='form-inline text-center'>
 				<div class="form-group">
 					<div class="lineOne">

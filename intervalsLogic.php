@@ -83,15 +83,24 @@
 				$accidentalCharTwo = '';
 			}
 
-			/*Subtracts the second scaler from the first scaler (does it +12 if the octave box is checked) to get the interval between them in scaler form, which corresponds to the IntervalNames array implemented at the top. */
+			/*Subtracts the second scaler from the first scaler (does it +12 if the octave box is checked) to get the interval between them in scaler form, which corresponds to the IntervalNames array implemented at the top. Also inverts any descending intervals*/
 			if (!$octave) {
 				$interval = $noteNumTwo - $noteNum;
+					if ($interval >= 0) {
+						$intervalName = $intervalNames[$interval];
+					} else {
+						$intervalName = $intervalNames[(12+$interval)];
+					}
 			} else {
 				$interval = ($noteNumTwo+12) - $noteNum;
-			}
+					if ($interval >= 12) {
+						$intervalName = $intervalNames[$interval];
+					} else {
+						$intervalName = $intervalNames[(12+$interval)];
+					}
+			}		
 
 			
-			$intervalName = $intervalNames[$interval];  #Stores the interval name as a variable
 			$alertType='alert-info';
 
 			#Concatenates and steralizes all the variables to output on the display
