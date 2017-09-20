@@ -1,4 +1,4 @@
-
+<?php require('intervalsLogic.php'); ?> 
 
 <!Doctype html>
 
@@ -56,8 +56,15 @@
 				</div>
 			</form>
 
+				<?php if ($_GET) : ?>
+            <div class="alert <?=$alertType?>" role="alert">
+                <?=$results?>
+            </div>
+        <?php endif; ?>
+
 		</div>
 
-		
+
+
 	</body>
 </html>
