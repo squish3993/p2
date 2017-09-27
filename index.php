@@ -21,7 +21,7 @@
 			<form method='Get' class='form-inline text-center'>
 				<div class="form-group">
 					<div class="lineOne">
-						<label for="note">Enter your first note:</label>
+						<label for="note">Enter your first note (required):</label>
 						<input type="text" class="form-control" name='note' id='note' placeholder="C, F, G, Etc" value='<?=sanitize($note)?>'>
 
 						<select name='accidental' id='accidental' class="form-control">
@@ -33,7 +33,7 @@
 					</div>
 					
 					<div class="lineTwo">
-						<label for='noteTwo'>Enter your second note:</label>
+						<label for='noteTwo'>Enter your second note (required):</label>
 						<input type='text' class="form-control" name='noteTwo' id='noteTwo' placeholder="C, F, G, Etc" value='<?=sanitize($noteTwo)?>'>
 
 						<select name='accidentalTwo' id='accidentalTwo' class="form-control">
@@ -54,11 +54,23 @@
 				</div>
 			</form>
 
-			<?php if ($_GET) : ?>
-            	<div class="alert <?=$alertType?> text-center" role="alert">
-                	<?=$results?>
-            	</div>
-        	<?php endif; ?>
+			 <?php if (!empty($errors)) : ?>
+        		<div class='alert alert-danger'>
+            		<ul>
+                		<?php foreach ($errors as $error) : ?>
+                   			 <li><?=sanitize($error);?></li>
+                		<?php endforeach; ?>
+                	
+           			 </ul>
+        		</div>
+
+    		<?php endif ?>
+
+
+    		<?php if ($form->isSubmitted() and empty($errors)) : ?>
+				<div class='alert alert-info text-center'>
+				<?=sanitize($intervalName);?>
+			<?php endif ?>
 		</div>
 	</body>
 </html>

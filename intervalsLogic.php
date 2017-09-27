@@ -1,6 +1,9 @@
 <?php 
 
 	require('helpers.php');
+	require('Form.php');
+
+	use DWA\Form;
 
 	/* Creates an array that assigns scaler values to each of the natural notes 
 	(Sharps and Flats will be implemented later) */
@@ -10,6 +13,7 @@
 	the interval is comprised of. Because arrays start at 0 by default, and the Unison interval starts at 0, we do not need to implement our own keys. */
 	$intervalNames = ['Unison', 'Minor 2nd', 'Major 2nd', 'Minor 3rd', 'Major 3rd', 'Perfect 4th', 'Tri-Tone (Also called Augmented 4th or Diminished 5th)', 'Perfect 5th', 'Minor 6th', 'Major 6th', 'Minor 7th', 'Major 7th', 'Octave', 'Minor 9th', 'Major 9th', 'Minor 10th', 'Major 10th', 'Perfect 11th', 'Augmented 11th or Dimished 12th', 'Perfect 12th', 'Minor 13th', 'Major 13th', 'Minor 14th', 'Major 14th'];
 
+	$form = new Form($_GET);
 	/*Series of if states that check for user inputs. This prevents errors from showing up when the page is first loaded and there are no inputs and saves the users choices when the page reloads. */ 
 	if (isset($_GET['note'])) {
 	    $note = $_GET['note'];
@@ -44,17 +48,20 @@
 	}
 
 
+	if ($form->isSubmitted()) {
+	$errors = $form->validate([
+			'note' => 'required', 
+			'noteTwo' => 'required',
+			'note' => 'musicalNote',
+			'noteTwo' => 'musicalNote'
+		]);
+	}
+
+	
 	/*Code for error messages depending on User's inputs. 
 	   If no errors, procedes to calculate intervals. */
-	if (($note == '') || ($noteTwo == '')) {
-		$alertType ='alert-danger';
-		$results ='Please enter two notes';
-	} elseif ((!array_key_exists(strtolower($note), $noteValues)) || (!array_key_exists(strtolower($noteTwo), $noteValues ))) {
-		$alertType='alert-danger';
-		$results='Please enter valid musical notes';
-	} elseif ((array_key_exists(strtolower($note), $noteValues)) && (array_key_exists(strtolower($noteTwo), $noteValues ))) 
-		{
-
+	if (empty($errors) && $form->isSubmitted())
+	{
 			#Makes sure input isn't case sensitive and converts the user's note into its scaler value. 
 			$noteNum = $noteValues[strtolower($note)];
 			$noteNumTwo = $noteValues[strtolower($noteTwo)];
@@ -100,11 +107,8 @@
 					}
 			}		
 
-			
-			$alertType='alert-info';
-
-			#Concatenates and steralizes all the variables to output on the display
-			$results='The interval between ' .sanitize(strtoupper($note)) .sanitize($accidentalChar)  .' and ' .sanitize(strtoupper($noteTwo)) .sanitize($accidentalCharTwo)  .' is a ' .sanitize($intervalName);
+		
+		
 
 		}
 
